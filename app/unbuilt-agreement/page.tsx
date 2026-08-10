@@ -54,7 +54,7 @@ export default function UnbuiltAgreementPage() {
             AGREEMENT
           </h1>
           <p className="mt-8 text-lg md:text-xl text-foreground/70 max-w-2xl leading-relaxed">
-            Terms for the one-time Full Stream package awarded through Unbuilt.
+            Terms for the one-time Dam Built package awarded through Unbuilt.
             Read before applying.
           </p>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -70,7 +70,7 @@ export default function UnbuiltAgreementPage() {
               01 / The Offer
             </h2>
             <p>
-              Rowgle (“we,” “us”) will provide one (1) complimentary Full Stream website
+              Rowgle (“we,” “us”) will provide one (1) complimentary Dam Built website
               package to one (1) selected applicant (“you,” “Client”) under the
               Unbuilt program. This is not a raffle, sweepstakes, or purchase-required
               promotion. Selection is based on eligibility and verification.
@@ -103,7 +103,7 @@ export default function UnbuiltAgreementPage() {
               03 / Scope of Work
             </h2>
             <p className="mb-4">
-              The awarded package is limited to the Full Stream offering described at{" "}
+              The awarded package is limited to the Dam Built offering described at{" "}
               <Link href="/proposal" className="text-accent hover:underline">
                 rowgle.com/proposal
               </Link>
@@ -174,7 +174,7 @@ export default function UnbuiltAgreementPage() {
             </h2>
             <p>
               There is no fee for the selected Unbuilt build. The work is provided
-              at $0 due under this program. The Full Stream package has standard commercial
+              at $0 due under this program. The Dam Built package has standard commercial
               value as listed on our proposal page; that value is waived for the
               winner only. This offer is one-time, non-transferable, and has no cash
               equivalent.
@@ -221,7 +221,7 @@ export default function UnbuiltAgreementPage() {
               10 / No Warranties & Limitation
             </h2>
             <p>
-              The site is delivered as a professional marketing build under the Full Stream
+              The site is delivered as a professional marketing build under the Dam Built
               scope. Rowgle does not guarantee rankings, leads, sales, or uninterrupted
               third-party services. To the maximum extent permitted by law, Rowgle’s
               liability under this agreement is limited to re-performance of the Full Stream

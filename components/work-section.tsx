@@ -9,39 +9,45 @@ gsap.registerPlugin(ScrollTrigger)
 
 const experiments = [
   {
-    title: "Brand Identity System",
-    medium: "Brand Identity",
-    description: "Complete visual identity including naming, logo, typography, color systems, and brand guidelines.",
+    title: "Site Build $0",
+    medium: "Tier 01 · Every Partnership",
+    description:
+      "Full custom website included with every partnership. No upfront build fee — the monthly plan is the product.",
     span: "col-span-2 row-span-2",
   },
   {
-    title: "Visual System",
-    medium: "Visual Systems",
-    description: "Type, color, imagery rules, and layout principles built for long-term brand consistency.",
+    title: "Lodge",
+    medium: "Tier 02 · $249/mo",
+    description:
+      "Free custom business site + steady monthly support. Updates, bug fixes, light content changes, and basic upkeep — capacity when you need it.",
     span: "col-span-1 row-span-1",
   },
   {
-    title: "Campaign Direction",
-    medium: "Art Direction",
-    description: "Photography direction, illustration systems, and visual storytelling across print and digital.",
+    title: "Dam Built",
+    medium: "Tier 03 · $499/mo",
+    description:
+      "Free brand-ready site + active monthly ops. Everything in Lodge, plus marketing materials, more revision capacity, and branding collaboration.",
     span: "col-span-1 row-span-2",
   },
   {
-    title: "Custom Website",
-    medium: "Web Experiences",
-    description: "Hand-built sites with clean architecture, strong performance, and intentional design.",
+    title: "Full Stream",
+    medium: "Tier 04 · $999/mo",
+    description:
+      "Free full system build + priority monthly partnership. Higher capacity for changes, marketing support, and ongoing brand direction — on-call, not on payroll.",
     span: "col-span-1 row-span-1",
   },
   {
-    title: "Digital Product",
-    medium: "Digital Products",
-    description: "Interfaces and tools designed for clarity, speed, and long-term maintainability.",
+    title: "Open Water",
+    medium: "Tier 05 · Custom",
+    description:
+      "Custom scope. Free-build model where it fits; monthly retainer and deliverables defined together for the real job.",
     span: "col-span-2 row-span-1",
   },
   {
-    title: "Content System",
-    medium: "Content Systems",
-    description: "Newsletters, presentations, and internal communications with consistent visual language.",
+    title: "Use When Needed",
+    medium: "Tier 06 · Capacity Model",
+    description:
+      "Not a full-time hire. Defined monthly capacity for changes, materials, and brand support — sharp, fair, sustainable.",
     span: "col-span-1 row-span-1",
   },
 ]
@@ -55,7 +61,6 @@ export function WorkSection() {
     if (!sectionRef.current || !headerRef.current || !gridRef.current) return
 
     const ctx = gsap.context(() => {
-      // Header slide in from left
       gsap.fromTo(
         headerRef.current,
         { x: -60, opacity: 0 },
@@ -69,7 +74,7 @@ export function WorkSection() {
             start: "top 90%",
             toggleActions: "play none none reverse",
           },
-        },
+        }
       )
 
       const cards = gridRef.current?.querySelectorAll("article")
@@ -94,25 +99,36 @@ export function WorkSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="work" className="relative py-32 pl-6 md:pl-28 pr-6 md:pr-12">
-      {/* Section header */}
+    <section
+      ref={sectionRef}
+      id="work"
+      className="relative py-32 pl-6 md:pl-28 pr-6 md:pr-12"
+    >
       <div ref={headerRef} className="mb-16 flex items-end justify-between">
         <div>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">02 / Systems</span>
-          <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">SELECTED PROJECTS</h2>
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+            02 / Systems
+          </span>
+          <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">
+            PACKAGE MODEL
+          </h2>
         </div>
         <p className="hidden md:block max-w-xs font-mono text-xs text-muted-foreground text-right leading-relaxed">
-          Creative work spanning branding, web development, graphic design, and digital strategy.
+          Free site build. Monthly partnership tiers. Capacity when you need it.
         </p>
       </div>
 
-      {/* Asymmetric grid */}
       <div
         ref={gridRef}
         className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[200px]"
       >
         {experiments.map((experiment, index) => (
-          <WorkCard key={index} experiment={experiment} index={index} persistHover={index === 0} />
+          <WorkCard
+            key={index}
+            experiment={experiment}
+            index={index}
+            persistHover={index === 0}
+          />
         ))}
       </div>
     </section>
@@ -157,22 +173,20 @@ function WorkCard({
     <article
       ref={cardRef}
       className={cn(
-        "group relative border border-border/40 p-5 flex flex-col justify-between transition-all duration-500 cursor-pointer overflow-hidden",
+        "group relative border border-border/40 p-5 flex flex-col justify-between transition-all duration-500 overflow-hidden select-none",
         experiment.span,
-        isActive && "border-accent/60",
+        isActive && "border-accent/60"
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Background layer */}
       <div
         className={cn(
           "absolute inset-0 bg-accent/5 transition-opacity duration-500",
-          isActive ? "opacity-100" : "opacity-0",
+          isActive ? "opacity-100" : "opacity-0"
         )}
       />
 
-      {/* Content */}
       <div className="relative z-10">
         <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
           {experiment.medium}
@@ -180,40 +194,37 @@ function WorkCard({
         <h3
           className={cn(
             "mt-3 font-[var(--font-bebas)] text-2xl md:text-4xl tracking-tight transition-colors duration-300",
-            isActive ? "text-accent" : "text-foreground",
+            isActive ? "text-accent" : "text-foreground"
           )}
         >
           {experiment.title}
         </h3>
       </div>
 
-      {/* Description - reveals on hover */}
       <div className="relative z-10">
         <p
           className={cn(
             "font-mono text-xs text-muted-foreground leading-relaxed transition-all duration-500 max-w-[280px]",
-            isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
+            isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           )}
         >
           {experiment.description}
         </p>
       </div>
 
-      {/* Index marker */}
       <span
         className={cn(
           "absolute bottom-4 right-4 font-mono text-[10px] transition-colors duration-300",
-          isActive ? "text-accent" : "text-muted-foreground/40",
+          isActive ? "text-accent" : "text-muted-foreground/40"
         )}
       >
         {String(index + 1).padStart(2, "0")}
       </span>
 
-      {/* Corner line */}
       <div
         className={cn(
           "absolute top-0 right-0 w-12 h-12 transition-all duration-500",
-          isActive ? "opacity-100" : "opacity-0",
+          isActive ? "opacity-100" : "opacity-0"
         )}
       >
         <div className="absolute top-0 right-0 w-full h-[1px] bg-accent" />

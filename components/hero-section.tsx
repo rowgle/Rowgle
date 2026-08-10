@@ -68,7 +68,7 @@ export function HeroSection() {
             href="#signals"
             className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            Latest Updates
+            Project Proposal
           </a>
         </div>
       </div>

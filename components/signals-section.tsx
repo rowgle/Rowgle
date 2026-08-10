@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -9,31 +10,39 @@ gsap.registerPlugin(ScrollTrigger)
 
 const signals = [
   {
-    date: "2026.06.10",
-    title: "Brand Launch Prep",
-    note: "Full-scope identity and design system development underway for Three Lanterns brand launch.",
+    date: "2026.08.10",
+    title: "Unbuilt",
+    note: "NO SITE. ONE BUILD. One registered U.S. business with no active marketing website gets a Dam Built package — on us. Not a raffle. First qualified applicant. SUBMISSIONS OPEN.",
+    href: "/unbuilt",
   },
   {
-    date: "2026.05.28",
-    title: "Web Development",
-    note: "Initiated site architecture and visual direction for a Facility Security Officer consulting rebrand.",
+    date: "2026.07.22",
+    title: "Full Stream · Air Center",
+    note: "Air Center Helicopters operating on the Full Stream tier — ongoing site, materials, and brand support for their niche airlift operation.",
   },
   {
-    date: "2026.05.15",
-    title: "Client Communications",
-    note: "Designed and delivered Q1 2026 company newsletter for a large aviation client.",
+    date: "2026.06.18",
+    title: "In Production · The Lit Elf",
+    note: "Seasonal lighting company site currently in production. Full build underway with launch staged for the active season.",
   },
   {
-    date: "2026.04.30",
-    title: "Brand Development",
-    note: "Led complete brand foundation and visual system for Harpy Industries, supporting defense-sector positioning.",
+    date: "2026.05.30",
+    title: "Open Water · Harpy Industries",
+    note: "Partner company Harpy Industries on the Open Water tier — custom scope covering FSO / PERSEC / FCL support and defense-sector positioning.",
   },
   {
-    date: "2024.04.12",
+    date: "2026.04.12",
     title: "Defense Support",
-    note: "Provided ongoing design and communications support for a major aviation government contract.",
+    note: "Continued design and communications support for a major aviation government contract.",
   },
 ]
+
+type Signal = {
+  date: string
+  title: string
+  note: string
+  href?: string
+}
 
 export function SignalsSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -45,7 +54,6 @@ export function SignalsSection() {
 
   useEffect(() => {
     if (!sectionRef.current || !cursorRef.current) return
-
     const section = sectionRef.current
     const cursor = cursorRef.current
 
@@ -53,7 +61,6 @@ export function SignalsSection() {
       const rect = section.getBoundingClientRect()
       const x = e.clientX - rect.left
       const y = e.clientY - rect.top
-
       gsap.to(cursor, {
         x: x,
         y: y,
@@ -80,7 +87,6 @@ export function SignalsSection() {
     if (!sectionRef.current || !headerRef.current || !cardsRef.current) return
 
     const ctx = gsap.context(() => {
-      // Header slide in from left
       gsap.fromTo(
         headerRef.current,
         { x: -60, opacity: 0 },
@@ -94,7 +100,7 @@ export function SignalsSection() {
             start: "top 85%",
             toggleActions: "play none none reverse",
           },
-        },
+        }
       )
 
       const cards = cardsRef.current?.querySelectorAll("article")
@@ -113,7 +119,7 @@ export function SignalsSection() {
               start: "top 90%",
               toggleActions: "play none none reverse",
             },
-          },
+          }
         )
       }
     }, sectionRef)
@@ -129,17 +135,19 @@ export function SignalsSection() {
           "pointer-events-none absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 z-50",
           "w-12 h-12 rounded-full border-2 border-accent bg-accent",
           "transition-opacity duration-300",
-          isHovering ? "opacity-100" : "opacity-0",
+          isHovering ? "opacity-100" : "opacity-0"
         )}
       />
 
-      {/* Section header */}
       <div ref={headerRef} className="mb-16 pr-6 md:pr-12">
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">01 / Updates</span>
-        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">LATEST NEWS</h2>
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+          01 / Updates
+        </span>
+        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">
+          LATEST NEWS
+        </h2>
       </div>
 
-      {/* Horizontal scroll container */}
       <div
         ref={(el) => {
           scrollRef.current = el
@@ -156,53 +164,60 @@ export function SignalsSection() {
   )
 }
 
-function SignalCard({
-  signal,
-  index,
-}: {
-  signal: { date: string; title: string; note: string }
-  index: number
-}) {
-  return (
+function SignalCard({ signal, index }: { signal: Signal; index: number }) {
+  const card = (
     <article
       className={cn(
         "group relative flex-shrink-0 w-80",
         "transition-transform duration-500 ease-out",
         "hover:-translate-y-2",
+        signal.href && "cursor-pointer"
       )}
     >
-      {/* Card with paper texture effect */}
       <div className="relative bg-card border border-border/50 md:border-t md:border-l md:border-r-0 md:border-b-0 p-8">
-        {/* Top torn edge effect */}
         <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/40 to-transparent" />
 
-        {/* Issue number - editorial style */}
         <div className="flex items-baseline justify-between mb-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
             No. {String(index + 1).padStart(2, "0")}
           </span>
-          <time className="font-mono text-[10px] text-muted-foreground/60">{signal.date}</time>
+          <time className="font-mono text-[10px] text-muted-foreground/60">
+            {signal.date}
+          </time>
         </div>
 
-        {/* Title */}
         <h3 className="font-[var(--font-bebas)] text-4xl tracking-tight mb-4 group-hover:text-accent transition-colors duration-300">
           {signal.title}
         </h3>
 
-        {/* Divider line */}
         <div className="w-12 h-px bg-accent/60 mb-6 group-hover:w-full transition-all duration-500" />
 
-        {/* Description */}
-        <p className="font-mono text-xs text-muted-foreground leading-relaxed">{signal.note}</p>
+        <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+          {signal.note}
+        </p>
 
-        {/* Bottom right corner fold effect */}
+        {signal.href && (
+          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
+            View offer →
+          </p>
+        )}
+
         <div className="absolute bottom-0 right-0 w-6 h-6 overflow-hidden">
           <div className="absolute bottom-0 right-0 w-8 h-8 bg-background rotate-45 translate-x-4 translate-y-4 border-t border-l border-border/30" />
         </div>
       </div>
 
-      {/* Shadow/depth layer */}
       <div className="absolute inset-0 -z-10 translate-x-1 translate-y-1 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </article>
   )
+
+  if (signal.href) {
+    return (
+      <Link href={signal.href} className="flex-shrink-0">
+        {card}
+      </Link>
+    )
+  }
+
+  return card
 }
