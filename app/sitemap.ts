@@ -11,10 +11,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${base}/unbuilt`,
+      url: `${base}/services`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${base}/portfolio`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${base}/unbuilt`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     {
       url: `${base}/proposal`,
@@ -23,10 +35,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${base}/review`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
       url: `${base}/client`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${base}/legal`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.4,
     },
   ]
 }
