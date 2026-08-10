@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react"
 import gsap from "gsap"
 import { HighlightText } from "@/components/highlight-text"
+import Link from "next/link"
 
 export default function ProposalPage() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -517,13 +518,23 @@ export default function ProposalPage() {
           )}
         </div>
 
-        {/* Footer */}
-        <div className="pt-8 border-t border-border/20 flex items-center justify-between gap-6">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            Rowgle · Proposal
-          </p>
-          <img src="/orangeharp.png" alt="" className="h-10 w-auto opacity-40" />
-        </div>
+        {/* Back link */}
+<div className="mt-24">
+  <Link
+    href="/"
+    className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground hover:text-accent transition-colors duration-200"
+  >
+    ← Back to Home
+  </Link>
+</div>
+
+{/* Footer */}
+<div className="pt-8 border-t border-border/20 flex items-center justify-between gap-6">
+  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+    Rowgle · Proposal
+  </p>
+  <img src="/orangeharp.png" alt="" className="h-10 w-auto opacity-40" />
+</div>
       </section>
     </main>
   )

@@ -14,7 +14,7 @@ const clients = [
     highlight: "AIR CENTER",
     rest: " HELICOPTERS",
     href: "https://flyaircenter.com",
-    note: "Niche Airlift Service Provider · Texas",
+    note: "GLOBAL AIRLIFT SUPPORT PROVIDER · Worldwide",
     status: "LIVE",
   },
   {
@@ -32,6 +32,30 @@ const clients = [
     href: "https://rowgle.com",
     note: "SEASONAL LIGHTING COMPANY · Colorado",
     status: "IN PRODUCTION",
+  },
+  {
+    number: "04",
+    highlight: "REDACTED",
+    rest: " FACE",
+    href: "https://redactedface.com",
+    note: "OPERATIONAL SECURITY · Unknown",
+    status: "QUEUED",
+  },
+  {
+    number: "05",
+    highlight: "BRIGADE",
+    rest: " FENCE",
+    href: "https://brigadefence.com",
+    note: "AFFORDABLE FENCE COMPANY · Texas",
+    status: "QUEUED",
+  },
+  {
+    number: "06",
+    highlight: "REST",
+    rest: " TIGHT",
+    href: "https://resttight.com",
+    note: "PHYSICAL SECURITY OPERATIONS · Texas",
+    status: "QUEUED",
   },
 ]
 
