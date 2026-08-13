@@ -70,8 +70,32 @@ export default function OpsPage() {
             Confidential · Internal Use Only
           </p>
           <p className="mt-8 text-lg text-foreground/75 leading-relaxed max-w-2xl">
-            Standard start-to-finish workflow, links, timing rules, and email templates.
-            Keep every client on the same track.
+            Standard workflow for the monthly partnership model. Site build is $0.
+            The product is the retainer. Keep every client on the same track.
+          </p>
+        </div>
+
+        {/* Model reminder */}
+        <div className="ops-block mb-16 border border-border/30 p-6">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-4">
+            Current Model
+          </h2>
+          <div className="space-y-2 text-sm text-foreground/75 leading-relaxed">
+            <p>
+              <span className="text-foreground">Lodge</span> — $249/mo · site $0 · recovery $1,500 (~6 mo)
+            </p>
+            <p>
+              <span className="text-foreground">Dam Built</span> — $499/mo · site $0 · recovery $3,000 (~6 mo)
+            </p>
+            <p>
+              <span className="text-foreground">Full Stream</span> — $999/mo · site $0 · recovery $5,000 (~5 mo)
+            </p>
+            <p>
+              <span className="text-foreground">Open Water</span> — custom monthly · recovery + term in SOW
+            </p>
+          </div>
+          <p className="mt-4 text-xs text-foreground/50 font-mono tracking-wide">
+            Monthly billing begins after launch (or as stated in agreement). Selection ≠ payment.
           </p>
         </div>
 
@@ -84,14 +108,14 @@ export default function OpsPage() {
             {[
               ["01", "Lead comes in", "Conversation / inquiry"],
               ["02", "Send proposal", "/proposal"],
-              ["03", "Client selects package", "Email notification received"],
+              ["03", "Client selects tier", "Formspree notification"],
               ["04", "Send agreement", "/client"],
               ["05", "Send onboarding", "/onboarding"],
-              ["06", "Collect payment", "Stripe Payment Link"],
-              ["07", "Start work", "Design / build begins"],
+              ["06", "Stripe setup", "Subscription / first invoice as agreed"],
+              ["07", "Start build", "Design / development begins"],
               ["08", "Design review rounds", "/approve"],
               ["09", "Final approval", "/approve"],
-              ["10", "Launch", "Go live"],
+              ["10", "Launch", "Site live · monthly partnership active"],
               ["11", "Request review", "/review"],
             ].map(([num, title, detail]) => (
               <div key={num} className="flex gap-5 border-b border-border/20 pb-4">
@@ -164,11 +188,15 @@ export default function OpsPage() {
             Timing Rules
           </h2>
           <div className="space-y-3 text-sm text-foreground/75 leading-relaxed">
-            <p>1. Never ask for payment before onboarding is complete.</p>
-            <p>2. Never start production before payment clears (unless intentionally flexible on Open Water).</p>
-            <p>3. Every design delivery uses /approve.</p>
-            <p>4. /review is only post-launch.</p>
-            <p>5. Open Water requires written scope + price before Stripe.</p>
+            <p>1. Selection on /proposal confirms direction only — not payment or contract.</p>
+            <p>2. Send agreement (/client) before onboarding and before Stripe.</p>
+            <p>3. Complete onboarding before production starts.</p>
+            <p>4. Stripe subscription / payment setup before or at start of build (per agreement).</p>
+            <p>5. Monthly partnership billing begins after launch unless agreement says otherwise.</p>
+            <p>6. Every design delivery uses /approve.</p>
+            <p>7. /review is only post-launch.</p>
+            <p>8. Open Water requires written scope + recovery terms before Stripe.</p>
+            <p>9. Free build is tied to minimum commitment — track recovery amount per tier.</p>
           </div>
         </div>
 
@@ -179,15 +207,17 @@ export default function OpsPage() {
           </h2>
           <div className="space-y-2 text-sm text-foreground/75 font-mono">
             <p>□ Proposal sent</p>
-            <p>□ Package selected</p>
+            <p>□ Tier selected (Formspree)</p>
             <p>□ Agreement sent (/client)</p>
             <p>□ Onboarding complete</p>
-            <p>□ Payment received</p>
-            <p>□ Work started</p>
+            <p>□ Stripe set up (subscription / first payment)</p>
+            <p>□ Build started</p>
             <p>□ Design round(s) via /approve</p>
             <p>□ Final approval</p>
             <p>□ Launched</p>
+            <p>□ Monthly partnership active</p>
             <p>□ Google review requested</p>
+            <p>□ Recovery / minimum term noted</p>
           </div>
         </div>
 
@@ -198,32 +228,32 @@ export default function OpsPage() {
           </h2>
 
           <div className="space-y-10">
-            {/* 1 */}
+            {/* 01 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
                 01 · Proposal Send
               </p>
               <p className="text-xs text-foreground/50 mb-4 font-mono">
-                Subject: Rowgle project options
+                Subject: Rowgle partnership options
               </p>
               <pre className="whitespace-pre-wrap text-sm text-foreground/75 leading-relaxed font-sans">
 {`Hey [Name],
 
 Great talking with you.
 
-Here’s our standard project options page. Pick the package that fits best, and add monthly care only if you want ongoing support after launch.
+We build the full custom site at $0. You pick a monthly partnership tier — that retainer is the product (updates, fixes, materials, brand support, capacity when you need us).
 
-Review options here:
+Review tiers and confirm direction here:
 https://rowgle.com/proposal
 
-Once you confirm direction, I’ll send next steps.
+Once you select, I’ll send agreement and next steps.
 
 — Nick
 Rowgle`}
               </pre>
             </div>
 
-            {/* 2 */}
+            {/* 02 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
                 02 · Agreement
@@ -234,19 +264,21 @@ Rowgle`}
               <pre className="whitespace-pre-wrap text-sm text-foreground/75 leading-relaxed font-sans">
 {`Hey [Name],
 
-Got your package selection — thank you.
+Got your tier selection — thank you.
 
 Next step is a quick agreement review:
 https://rowgle.com/client
 
-Once that’s done, I’ll send the project kickoff form.
+This covers the free site build, monthly partnership, and minimum commitment terms.
+
+Once that’s done, I’ll send the kickoff form.
 
 — Nick
 Rowgle`}
               </pre>
             </div>
 
-            {/* 3 */}
+            {/* 03 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
                 03 · Onboarding
@@ -259,42 +291,42 @@ Rowgle`}
 
 Ready for kickoff.
 
-Please complete this short onboarding form so we can start with clear goals, assets, and timeline:
+Please complete this short onboarding form so we start with clear goals, assets, and timeline:
 https://rowgle.com/onboarding
 
-As soon as that’s in, I’ll send payment details and we can get moving.
+As soon as that’s in, I’ll send Stripe details and we get moving on the build.
 
 — Nick
 Rowgle`}
               </pre>
             </div>
 
-            {/* 4 */}
+            {/* 04 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
-                04 · Payment
+                04 · Payment / Stripe
               </p>
               <p className="text-xs text-foreground/50 mb-4 font-mono">
-                Subject: Payment link — [Package Name]
+                Subject: Payment setup — [Lodge / Dam Built / Full Stream / Open Water]
               </p>
               <pre className="whitespace-pre-wrap text-sm text-foreground/75 leading-relaxed font-sans">
 {`Hey [Name],
 
 Onboarding received — thank you.
 
-Here’s the secure payment link for [Lodge / Dam Built / Full Stream / Open Water]:
+Here’s the secure Stripe link for your [Lodge / Dam Built / Full Stream / Open Water] partnership:
 [STRIPE LINK]
 
-Once payment clears, we start work.
+Site build remains $0. Monthly partnership billing runs per the agreement (typically after launch).
 
-If you selected monthly care, that begins once the project is active and is billed separately.
+Once this is set, we start production.
 
 — Nick
 Rowgle`}
               </pre>
             </div>
 
-            {/* 5 */}
+            {/* 05 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
                 05 · Work Started
@@ -305,7 +337,7 @@ Rowgle`}
               <pre className="whitespace-pre-wrap text-sm text-foreground/75 leading-relaxed font-sans">
 {`Hey [Name],
 
-Payment received and you’re officially in production.
+You’re in build.
 
 I’ll keep communication tight and send the first review link when concepts are ready.
 
@@ -314,7 +346,7 @@ Rowgle`}
               </pre>
             </div>
 
-            {/* 6 */}
+            {/* 06 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
                 06 · Design Review
@@ -337,7 +369,7 @@ Rowgle`}
               </pre>
             </div>
 
-            {/* 7 */}
+            {/* 07 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
                 07 · Revisions
@@ -358,7 +390,7 @@ Rowgle`}
               </pre>
             </div>
 
-            {/* 8 */}
+            {/* 08 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
                 08 · Final Approval
@@ -379,7 +411,7 @@ Rowgle`}
               </pre>
             </div>
 
-            {/* 9 */}
+            {/* 09 */}
             <div className="border border-border/30 p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-3">
                 09 · Launch
@@ -394,8 +426,9 @@ You’re live.
 
 Site: [URL]
 
+Your monthly partnership is now active. Use the capacity when you need updates, materials, or support.
+
 If anything small needs adjusting in the first few days, just reply here.
-If you’re on a monthly care plan, you’re already covered.
 
 — Nick
 Rowgle`}

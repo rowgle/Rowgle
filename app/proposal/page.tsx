@@ -8,6 +8,7 @@ import Link from "next/link"
 export default function ProposalPage() {
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
+
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [company, setCompany] = useState("")
@@ -31,6 +32,7 @@ export default function ProposalPage() {
           ease: "power3.out",
         })
       }
+
       const blocks = section.querySelectorAll(".proposal-block")
       if (blocks.length > 0) {
         gsap.from(blocks, {
@@ -71,10 +73,7 @@ export default function ProposalPage() {
     formData.append("company", company || "N/A")
     formData.append("package", packageLabel)
     formData.append("notes", notes || "None")
-    formData.append(
-      "_subject",
-      `Proposal Selection — ${company || name}`
-    )
+    formData.append("_subject", `Proposal Selection — ${company || name}`)
 
     try {
       const res = await fetch("https://formspree.io/f/mzepewvg", {
@@ -112,16 +111,10 @@ export default function ProposalPage() {
         ref={sectionRef}
         className="relative z-10 pt-28 pb-40 px-6 md:px-12 max-w-3xl mx-auto"
       >
-        {/* Brand Mark */}
-        <div className="mb-14 flex items-center gap-4">
-          <img src="/beaver.png" alt="Rowgle" className="h-12 w-auto opacity-90" />
-          <div className="h-px flex-1 bg-border/30" />
-        </div>
-
         {/* Header */}
         <div ref={headerRef} className="mb-20">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-            Project Proposal
+            How We Work
           </span>
           <h1 className="mt-5 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight leading-none">
             YOUR SITE
@@ -131,13 +124,13 @@ export default function ProposalPage() {
             </span>
           </h1>
           <p className="mt-6 text-foreground/60 font-mono text-xs uppercase tracking-[0.2em]">
-            Monthly Partnership Model
+            Monthly Partnership · No Upfront Build Cost
           </p>
           <p className="mt-8 text-lg text-foreground/75 leading-relaxed max-w-2xl">
-            We design and build your full custom website at no upfront cost. You
-            invest in a monthly partnership — updates, fixes, marketing materials,
-            branding support, and capacity when you need us. Not a full-time hire.
-            A retainer you actually use.
+            Rowgle designs and builds a full custom website at $0. You partner
+            monthly for ongoing support — updates, fixes, materials, branding
+            help, and real capacity when you need it. Not a full-time hire. A
+            retainer you actually use.
           </p>
         </div>
 
@@ -150,22 +143,22 @@ export default function ProposalPage() {
             <div className="flex gap-5">
               <span className="font-mono text-xs text-accent pt-1">01</span>
               <p className="text-sm text-foreground/70 leading-relaxed">
-                Choose a monthly partnership tier. Your full website build is
-                included at $0.
+                Pick a monthly partnership tier. The full website build is
+                included at no charge.
               </p>
             </div>
             <div className="flex gap-5">
               <span className="font-mono text-xs text-accent pt-1">02</span>
               <p className="text-sm text-foreground/70 leading-relaxed">
-                We design, build, and launch your site. Monthly service starts
-                after launch.
+                We design, build, and launch. Monthly service starts after the
+                site is live.
               </p>
             </div>
             <div className="flex gap-5">
               <span className="font-mono text-xs text-accent pt-1">03</span>
               <p className="text-sm text-foreground/70 leading-relaxed">
                 Use the capacity when you need it — changes, materials, brand
-                support, maintenance. Cancel anytime after terms are met.
+                support, maintenance. Cancel after the minimum term is met.
               </p>
             </div>
           </div>
@@ -177,9 +170,8 @@ export default function ProposalPage() {
             Partnership Tiers
           </h2>
           <p className="text-sm text-foreground/65 leading-relaxed mb-8">
-            Every tier includes a fully coded custom website at no charge. The
-            monthly fee is the product — ongoing support that goes beyond keeping
-            the lights on.
+            Every tier includes a fully coded custom site at $0. The monthly fee
+            is the product — ongoing support that goes past basic upkeep.
           </p>
 
           <div className="space-y-4">
@@ -199,9 +191,9 @@ export default function ProposalPage() {
                   </div>
                   <h3 className="text-2xl mb-2">Lodge</h3>
                   <p className="text-sm text-foreground/65 leading-relaxed mb-3">
-                    Free custom business site + steady monthly support. Updates,
-                    bug fixes, light content changes, and basic upkeep — capacity
-                    when you need it.
+                    Free custom business site plus steady monthly support.
+                    Updates, bug fixes, light content changes, and basic upkeep —
+                    capacity when you need it.
                   </p>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">
                     Site build $0 · Light monthly capacity
@@ -229,9 +221,9 @@ export default function ProposalPage() {
                   </div>
                   <h3 className="text-2xl mb-2">Dam Built</h3>
                   <p className="text-sm text-foreground/65 leading-relaxed mb-3">
-                    Free brand-ready site + active monthly ops. Everything in
+                    Free brand-ready site plus active monthly ops. Everything in
                     Lodge, plus marketing materials, more revision capacity, and
-                    branding collaboration without a full-time team.
+                    branding collaboration — without a full-time team.
                   </p>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">
                     Site build $0 · Materials + brand support
@@ -259,9 +251,9 @@ export default function ProposalPage() {
                   </div>
                   <h3 className="text-2xl mb-2">Full Stream</h3>
                   <p className="text-sm text-foreground/65 leading-relaxed mb-3">
-                    Free full system build + priority monthly partnership. Higher
-                    capacity for changes, marketing management support, and
-                    ongoing brand direction — still on-call, not on payroll.
+                    Free full system build plus priority monthly partnership.
+                    Higher capacity for changes, marketing support, and ongoing
+                    brand direction — on-call, not on payroll.
                   </p>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">
                     Site build $0 · Priority capacity
@@ -290,7 +282,7 @@ export default function ProposalPage() {
                   <h3 className="text-2xl mb-2">Open Water</h3>
                   <p className="text-sm text-foreground/65 leading-relaxed mb-3">
                     Custom scope. Site still structured around the free-build
-                    model where it fits; monthly retainer and deliverables defined
+                    model where it fits. Monthly retainer and deliverables defined
                     together for the real job.
                   </p>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">
@@ -318,8 +310,8 @@ export default function ProposalPage() {
             <p>• Defined monthly capacity — use it when you need us</p>
           </div>
           <p className="mt-6 text-sm text-foreground/55 leading-relaxed border-l border-border/40 pl-4">
-            This is not unlimited full-time staff. Each tier has capacity limits so
-            the partnership stays sharp, fair, and sustainable on both sides.
+            This is not unlimited full-time staff. Each tier has capacity limits
+            so the partnership stays sharp, fair, and sustainable on both sides.
           </p>
         </div>
 
@@ -330,12 +322,12 @@ export default function ProposalPage() {
           </h2>
           <div className="space-y-4 text-sm text-foreground/75 leading-relaxed">
             <p>
-              Selecting a tier confirms your preferred direction — it is not
-              payment.
+              Selecting a tier signals interest and preferred direction — it is
+              not payment.
             </p>
             <p>
-              After selection, Rowgle follows up with agreement details and a
-              secure Stripe link. The website build is included at $0. Monthly
+              After you confirm, Rowgle follows up with agreement details and a
+              secure Stripe link. The website build stays at $0. Monthly
               partnership billing begins after launch (or as stated in your
               agreement).
             </p>
@@ -361,7 +353,6 @@ export default function ProposalPage() {
               amount requires written agreement from Rowgle.
             </p>
           </div>
-
           <div className="mt-6 border border-border/40 p-5 space-y-3 text-sm text-foreground/75">
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-1">
               Minimum commitment by tier
@@ -383,7 +374,6 @@ export default function ProposalPage() {
               · recovery and term defined in your statement of work
             </p>
           </div>
-
           <div className="mt-6 space-y-3 text-sm text-foreground/70 leading-relaxed">
             <p>
               • Scope and capacity are defined by tier; overages may be billed
@@ -415,10 +405,13 @@ export default function ProposalPage() {
             </div>
           ) : (
             <>
-              <h2 className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-8">
-                Confirm Direction
+              <h2 className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-3">
+                Get Started
               </h2>
-
+              <p className="text-sm text-foreground/65 leading-relaxed mb-8">
+                Select a tier above, then confirm below. We’ll send agreement and
+                next steps — no charge on selection.
+              </p>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <input
                   type="text"
@@ -427,7 +420,6 @@ export default function ProposalPage() {
                   tabIndex={-1}
                   autoComplete="off"
                 />
-
                 <div>
                   <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-2">
                     Full Name
@@ -441,7 +433,6 @@ export default function ProposalPage() {
                     placeholder="Your full name"
                   />
                 </div>
-
                 <div>
                   <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-2">
                     Email
@@ -455,7 +446,6 @@ export default function ProposalPage() {
                     placeholder="you@company.com"
                   />
                 </div>
-
                 <div>
                   <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-2">
                     Company
@@ -468,7 +458,6 @@ export default function ProposalPage() {
                     placeholder="Optional"
                   />
                 </div>
-
                 <div>
                   <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-2">
                     Notes
@@ -481,7 +470,6 @@ export default function ProposalPage() {
                     placeholder="Anything we should know before next steps"
                   />
                 </div>
-
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
@@ -499,13 +487,11 @@ export default function ProposalPage() {
                     Rowgle will follow up with agreement and payment details.
                   </span>
                 </label>
-
                 {error && (
                   <p className="font-mono text-xs text-red-400">
                     Something went wrong. Try again or email hello@rowgle.com.
                   </p>
                 )}
-
                 <button
                   type="submit"
                   disabled={!isValid || sending}
@@ -519,22 +505,22 @@ export default function ProposalPage() {
         </div>
 
         {/* Back link */}
-<div className="mt-24">
-  <Link
-    href="/"
-    className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground hover:text-accent transition-colors duration-200"
-  >
-    ← Back to Home
-  </Link>
-</div>
+        <div className="mt-24">
+          <Link
+            href="/"
+            className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground hover:text-accent transition-colors duration-200"
+          >
+            ← Back to Home
+          </Link>
+        </div>
 
-{/* Footer */}
-<div className="pt-8 border-t border-border/20 flex items-center justify-between gap-6">
-  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-    Rowgle · Proposal
-  </p>
-  <img src="/orangeharp.png" alt="" className="h-10 w-auto opacity-40" />
-</div>
+        {/* Footer */}
+        <div className="pt-8 border-t border-border/20 flex items-center justify-between gap-6">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            Rowgle · Partnership
+          </p>
+          <img src="/orangeharp.png" alt="" className="h-10 w-auto opacity-40" />
+        </div>
       </section>
     </main>
   )

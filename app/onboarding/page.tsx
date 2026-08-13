@@ -6,11 +6,13 @@ import gsap from "gsap"
 export default function OnboardingPage() {
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     company: "",
     website: "",
+    tier: "",
     goals: "",
     audience: "",
     references: "",
@@ -18,6 +20,7 @@ export default function OnboardingPage() {
     timeline: "",
     notes: "",
   })
+
   const [selectedFiles, setSelectedFiles] = useState<string[]>([])
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
@@ -40,6 +43,7 @@ export default function OnboardingPage() {
           ease: "power3.out",
         })
       }
+
       const blocks = section.querySelectorAll(".onboard-block")
       if (blocks.length > 0) {
         gsap.from(blocks, {
@@ -68,6 +72,7 @@ export default function OnboardingPage() {
     formData.append("email", form.email)
     formData.append("company", form.company)
     formData.append("website", form.website || "N/A")
+    formData.append("tier", form.tier || "N/A")
     formData.append("goals", form.goals || "N/A")
     formData.append("audience", form.audience || "N/A")
     formData.append("references", form.references || "N/A")
@@ -118,12 +123,6 @@ export default function OnboardingPage() {
         ref={sectionRef}
         className="relative z-10 pt-28 pb-40 px-6 md:px-12 max-w-3xl mx-auto"
       >
-        {/* Brand Mark */}
-        <div className="mb-14 flex items-center gap-4">
-          <img src="/beaver.png" alt="Rowgle" className="h-12 w-auto opacity-90" />
-          <div className="h-px flex-1 bg-border/30" />
-        </div>
-
         {/* Header */}
         <div ref={headerRef} className="mb-20">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
@@ -138,8 +137,9 @@ export default function OnboardingPage() {
             Confidential · Client Use Only
           </p>
           <p className="mt-8 text-lg text-foreground/75 leading-relaxed max-w-2xl">
-            Complete this form so we can start with clarity. The more detail you
-            provide, the faster we can move.
+            Your site build is included at $0 with the monthly partnership.
+            Complete this form so we start with clear goals, assets, and timeline
+            before Stripe setup and production.
           </p>
         </div>
 
@@ -149,8 +149,8 @@ export default function OnboardingPage() {
               ONBOARDING RECEIVED
             </p>
             <p className="text-foreground/70 leading-relaxed mb-2">
-              Got it. We’ll review your details and follow up with kickoff next
-              steps.
+              Got it. We’ll review your details, send payment setup, and get the
+              build moving.
             </p>
             <p className="text-foreground/70 leading-relaxed">
               Questions?{" "}
@@ -229,6 +229,31 @@ export default function OnboardingPage() {
                     placeholder="https://"
                   />
                 </div>
+                <div>
+                  <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-2">
+                    Partnership Tier
+                  </label>
+                  <div className="relative">
+                    <select
+                      value={form.tier}
+                      onChange={(e) => update("tier", e.target.value)}
+                      className="w-full appearance-none bg-background border border-border/40 focus:border-accent hover:border-accent px-4 py-3 pr-10 text-sm outline-none transition-colors cursor-pointer"
+                    >
+                      <option value="">Select tier</option>
+                      <option value="Lodge — $249/mo">Lodge — $249/mo</option>
+                      <option value="Dam Built — $499/mo">Dam Built — $499/mo</option>
+                      <option value="Full Stream — $999/mo">
+                        Full Stream — $999/mo
+                      </option>
+                      <option value="Open Water — Custom">
+                        Open Water — Custom
+                      </option>
+                    </select>
+                    <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-foreground/40 text-xs">
+                      ▾
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -247,7 +272,7 @@ export default function OnboardingPage() {
                     value={form.goals}
                     onChange={(e) => update("goals", e.target.value)}
                     className="w-full bg-transparent border border-border/40 focus:border-accent px-4 py-3 text-sm outline-none transition-colors resize-none"
-                    placeholder="What does success look like for this project?"
+                    placeholder="What does success look like for this site and partnership?"
                   />
                 </div>
                 <div>
@@ -274,7 +299,6 @@ export default function OnboardingPage() {
                     placeholder="Links to sites, brands, or work you like"
                   />
                 </div>
-
                 <div>
                   <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-2">
                     Existing Assets
@@ -321,7 +345,6 @@ export default function OnboardingPage() {
                     </p>
                   </div>
                 </div>
-
                 <div>
                   <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-2">
                     Ideal Timeline
@@ -352,16 +375,15 @@ export default function OnboardingPage() {
             {/* Submit */}
             <div className="onboard-block mb-16 pt-10 border-t border-border/30">
               <p className="text-sm text-foreground/65 leading-relaxed mb-8">
-                Submitting this form sends your responses to Rowgle so we can
-                prepare kickoff and next steps.
+                Submitting sends your responses to Rowgle. Next steps are payment
+                setup and the start of your $0 site build under the selected
+                monthly partnership.
               </p>
-
               {error && (
                 <p className="font-mono text-xs text-red-400 mb-4">
                   Something went wrong. Try again or email hello@rowgle.com.
                 </p>
               )}
-
               <button
                 type="submit"
                 disabled={!isValid || sending}

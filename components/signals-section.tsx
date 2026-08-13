@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useEffect } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import gsap from "gsap"
@@ -8,7 +8,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const signals = [
+type Signal = {
+  date: string
+  title: string
+  note: string
+  href?: string
+  status?: string
+}
+
+const signals: Signal[] = [
   {
     date: "2026.08.10",
     title: "Unbuilt",
@@ -17,71 +25,39 @@ const signals = [
   },
   {
     date: "2026.07.22",
-    title: "Full Stream · Air Center",
-    note: "Air Center Helicopters operating on the Full Stream tier — ongoing site, materials, and brand support for their niche airlift operation.",
+    title: "Air Center",
+    note: "Air Center Helicopters — live at flyaircenter.com. Niche airlift operation on Full Stream: site, materials, and ongoing brand support.",
+    status: "LIVE",
+    href: "https://flyaircenter.com",
+  },
+  {
+    date: "2026.07.08",
+    title: "Mine Service",
+    note: "Mine Service Inc. — mineserviceinc.com. Full site currently in production for their industrial and field operations.",
+    status: "IN PRODUCTION",
+    href: "https://mineserviceinc.com",
   },
   {
     date: "2026.06.18",
-    title: "In Production · The Lit Elf",
-    note: "Seasonal lighting company site currently in production. Full build underway with launch staged for the active season.",
+    title: "The Lit Elf",
+    note: "The Lit Elf — thelitelf.com. Seasonal lighting company site in production. Launch staged for the active season.",
+    status: "IN PRODUCTION",
+    href: "https://thelitelf.com",
   },
   {
     date: "2026.05.30",
-    title: "Open Water · Harpy Industries",
-    note: "Partner company Harpy Industries on the Open Water tier — custom scope covering FSO / PERSEC / FCL support and defense-sector positioning.",
-  },
-  {
-    date: "2026.04.12",
-    title: "Defense Support",
-    note: "Continued design and communications support for a major aviation government contract.",
+    title: "Harpy",
+    note: "Harpy Industries — harpyindustries.com. Live Open Water partnership covering FSO / PERSEC / FCL support and defense-sector positioning.",
+    status: "LIVE",
+    href: "https://harpyindustries.com",
   },
 ]
-
-type Signal = {
-  date: string
-  title: string
-  note: string
-  href?: string
-}
 
 export function SignalsSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
-  const cursorRef = useRef<HTMLDivElement>(null)
-  const [isHovering, setIsHovering] = useState(false)
-
-  useEffect(() => {
-    if (!sectionRef.current || !cursorRef.current) return
-    const section = sectionRef.current
-    const cursor = cursorRef.current
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = section.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      gsap.to(cursor, {
-        x: x,
-        y: y,
-        duration: 0.5,
-        ease: "power3.out",
-      })
-    }
-
-    const handleMouseEnter = () => setIsHovering(true)
-    const handleMouseLeave = () => setIsHovering(false)
-
-    section.addEventListener("mousemove", handleMouseMove)
-    section.addEventListener("mouseenter", handleMouseEnter)
-    section.addEventListener("mouseleave", handleMouseLeave)
-
-    return () => {
-      section.removeEventListener("mousemove", handleMouseMove)
-      section.removeEventListener("mouseenter", handleMouseEnter)
-      section.removeEventListener("mouseleave", handleMouseLeave)
-    }
-  }, [])
 
   useEffect(() => {
     if (!sectionRef.current || !headerRef.current || !cardsRef.current) return
@@ -128,17 +104,11 @@ export function SignalsSection() {
   }, [])
 
   return (
-    <section id="signals" ref={sectionRef} className="relative py-32 pl-6 md:pl-28">
-      <div
-        ref={cursorRef}
-        className={cn(
-          "pointer-events-none absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 z-50",
-          "w-12 h-12 rounded-full border-2 border-accent bg-accent",
-          "transition-opacity duration-300",
-          isHovering ? "opacity-100" : "opacity-0"
-        )}
-      />
-
+    <section
+      id="signals"
+      ref={sectionRef}
+      className="relative py-32 pl-6 md:pl-28"
+    >
       <div ref={headerRef} className="mb-16 pr-6 md:pr-12">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
           01 / Updates
@@ -165,13 +135,22 @@ export function SignalsSection() {
 }
 
 function SignalCard({ signal, index }: { signal: Signal; index: number }) {
-  const card = (
+  const isExternal = Boolean(signal.href?.startsWith("http"))
+  const ctaLabel = isExternal ? "Visit site" : "View offer"
+
+  const ctaClassName = cn(
+    "group/cta mt-6 inline-flex items-center gap-2",
+    "font-mono text-[10px] uppercase tracking-[0.25em] text-accent",
+    "transition-all duration-300 ease-out",
+    "hover:gap-3 hover:translate-x-1"
+  )
+
+  return (
     <article
       className={cn(
         "group relative flex-shrink-0 w-80",
         "transition-transform duration-500 ease-out",
-        "hover:-translate-y-2",
-        signal.href && "cursor-pointer"
+        "hover:-translate-y-2"
       )}
     >
       <div className="relative bg-card border border-border/50 md:border-t md:border-l md:border-r-0 md:border-b-0 p-8">
@@ -181,26 +160,50 @@ function SignalCard({ signal, index }: { signal: Signal; index: number }) {
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
             No. {String(index + 1).padStart(2, "0")}
           </span>
-          <time className="font-mono text-[10px] text-muted-foreground/60">
-            {signal.date}
-          </time>
+          {signal.status ? (
+            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-accent border border-accent/40 px-2 py-0.5">
+              {signal.status}
+            </span>
+          ) : (
+            <time className="font-mono text-[10px] text-muted-foreground/60">
+              {signal.date}
+            </time>
+          )}
         </div>
 
         <h3 className="font-[var(--font-bebas)] text-4xl tracking-tight mb-4 group-hover:text-accent transition-colors duration-300">
           {signal.title}
         </h3>
 
+        {/* Orange line still expands on card hover */}
         <div className="w-12 h-px bg-accent/60 mb-6 group-hover:w-full transition-all duration-500" />
 
         <p className="font-mono text-xs text-muted-foreground leading-relaxed">
           {signal.note}
         </p>
 
-        {signal.href && (
-          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
-            View offer →
-          </p>
-        )}
+        {/* Only this is clickable */}
+        {signal.href &&
+          (isExternal ? (
+            <a
+              href={signal.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={ctaClassName}
+            >
+              <span>{ctaLabel}</span>
+              <span className="transition-transform duration-300 group-hover/cta:translate-x-1">
+                →
+              </span>
+            </a>
+          ) : (
+            <Link href={signal.href} className={ctaClassName}>
+              <span>{ctaLabel}</span>
+              <span className="transition-transform duration-300 group-hover/cta:translate-x-1">
+                →
+              </span>
+            </Link>
+          ))}
 
         <div className="absolute bottom-0 right-0 w-6 h-6 overflow-hidden">
           <div className="absolute bottom-0 right-0 w-8 h-8 bg-background rotate-45 translate-x-4 translate-y-4 border-t border-l border-border/30" />
@@ -210,14 +213,4 @@ function SignalCard({ signal, index }: { signal: Signal; index: number }) {
       <div className="absolute inset-0 -z-10 translate-x-1 translate-y-1 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </article>
   )
-
-  if (signal.href) {
-    return (
-      <Link href={signal.href} className="flex-shrink-0">
-        {card}
-      </Link>
-    )
-  }
-
-  return card
 }

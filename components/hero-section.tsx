@@ -68,7 +68,7 @@ export function HeroSection() {
             href="/proposal"
             className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            Project Proposal
+            How We Work
           </a>
         </div>
       </div>
