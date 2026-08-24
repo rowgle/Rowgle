@@ -192,7 +192,7 @@ export function PortfolioSection() {
       {/* Logo + Closing */}
       <div className="pt-10 max-w-4xl">
         <img
-          src="/orangeharp.png"
+          src="/r-brand-mark-orange.png"
           alt="Rowgle"
           className="h-12 md:h-14 w-auto opacity-70 hover:opacity-100 transition-opacity duration-300 mb-8"
         />

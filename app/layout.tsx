@@ -46,12 +46,12 @@ export const metadata: Metadata = {
   icons: {
   icon: [
     {
-      url: "/rowgle-favicon.png",
+      url: "/r-brand-favicon.png",
       type: "image/png",
     },
   ],
-  apple: "/rowgle-favicon.png",
-  shortcut: "/rowgle-favicon.png",
+  apple: "/r-brand-favicon.png",
+  shortcut: "/r-brand-favicon.png",
 },
 }
 

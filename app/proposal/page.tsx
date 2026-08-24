@@ -519,7 +519,7 @@ export default function ProposalPage() {
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             Rowgle · Partnership
           </p>
-          <img src="/orangeharp.png" alt="" className="h-10 w-auto opacity-40" />
+          <img src="/r-brand-mark-orange.png" alt="" className="h-10 w-auto opacity-40" />
         </div>
       </section>
     </main>

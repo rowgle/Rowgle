@@ -258,13 +258,13 @@ export function ColophonSection() {
           © 2026 Rowgle. All rights reserved.
         </p>
         <Image
-          src="/orangeharp.png"
+          src="/r-brand-mark-orange.png"
           alt="Rowgle"
           width={40}
           height={40}
           className="opacity-60 hover:opacity-100 transition-opacity"
         />
-        <p className="font-mono text-[10px] text-muted-foreground">Designed with Precision. Built by Beaver.</p>
+        <p className="font-mono text-[10px] text-muted-foreground">Designed with Precision. Built for Brand.</p>
       </div>
     </section>
   )
