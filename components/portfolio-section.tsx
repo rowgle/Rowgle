@@ -21,7 +21,7 @@ const clients = [
     number: "02",
     highlight: "MINE SERVICE",
     rest: " INC.",
-    href: "https://mineserviceinc.com",
+    href: "https://mineservice-ckczquewl-rowgle-projects.vercel.app",
     note: "GENERAL CONTRACTING · Texas",
     status: "IN PRODUCTION",
   },
@@ -101,29 +101,69 @@ export function PortfolioSection() {
       id="portfolio"
       className="relative min-h-screen py-24 md:py-32 pl-6 md:pl-28 pr-6 md:pr-16"
     >
-      {/* Quiet index rail */}
-      <div
-        className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 flex-col gap-6 font-mono text-[10px] tracking-[0.3em] text-muted-foreground z-20"
-        aria-hidden="true"
-      >
+      {/* Quiet index rail — click to jump */}
+      <div className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 flex-col gap-6 font-mono text-[10px] tracking-[0.3em] text-muted-foreground z-20">
         {clients.map((c) => (
-          <span key={c.number} className="hover:text-accent transition-colors">
+          <button
+            key={c.number}
+            type="button"
+            onClick={() => {
+              document.getElementById(`client-${c.number}`)?.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              })
+            }}
+            className="text-left hover:text-accent transition-colors"
+          >
             {c.number}
-          </span>
+          </button>
         ))}
       </div>
 
       {/* Label only */}
-<div ref={headerRef} className="mb-28 md:mb-36">
-  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-    00 / Portfolio
-  </span>
-</div>
+      <div ref={headerRef} className="mb-28 md:mb-36">
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+          00 / Portfolio
+        </span>
+      </div>
+
+      {/* About — compact */}
+      <div className="mb-28 md:mb-36 max-w-4xl">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-end">
+          <div className="md:col-span-4">
+            <div className="relative overflow-hidden border border-border">
+              <img
+                src="/redacted.png"
+                alt="Nicholas Harp"
+                className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
+            </div>
+            <div className="mt-4 flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                023 / Harp, N.
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                TX / DoD
+              </span>
+            </div>
+          </div>
+
+          <div className="md:col-span-8 pb-1">
+            <h2 className="font-[var(--font-bebas)] text-4xl md:text-5xl tracking-tight leading-none mb-6">
+              FOUNDER
+            </h2>
+            <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-lg">
+              The day job pays, but it doesn’t scratch the itch. I got tired of watching companies do serious work for three-letter agencies while sitting on websites that looked like they were built in a waiting room. Rowgle exists to fix that. Defense-first. Anyone with standards is welcome.
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* Client list */}
       <div ref={listRef} className="space-y-28 md:space-y-36 max-w-4xl">
         {clients.map((client) => (
-          <article key={client.number} className="group">
+          <article key={client.number} id={`client-${client.number}`} className="group">
             <div className="flex items-center gap-3 mb-5">
               <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                 {client.number} / CLIENT
@@ -161,8 +201,6 @@ export function PortfolioSection() {
           </article>
         ))}
       </div>
-
-            {/* Client list ends above */}
 
       {/* Social */}
       <div className="pt-20 md:pt-28 max-w-4xl border-t border-border/30">
